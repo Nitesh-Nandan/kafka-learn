@@ -12,9 +12,9 @@
 ## Topics Creations
 ```shell
 # topic creation
-kafka-topics.sh --create --topic simple.test.topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
-kafka-topics.sh --create --topic simple.test.topic.error --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
-kafka-topics.sh --create --topic simple.test.topic.error.dlt --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+kafka-topics.sh --create --topic simple.test.topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+kafka-topics.sh --create --topic simple.test.topic.error --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+kafka-topics.sh --create --topic simple.test.topic.error.dlt --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
 ```
 ## List all topics
 ```shell
@@ -32,4 +32,14 @@ kafka-console-producer.sh --broker-list localhost:9092 --topic simple.test.topic
 ```shell
 # Message Reading
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic simple.test.topic.error.dlt --from-beginning
+```
+
+## Monitoring Offset
+```shell
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group simple-kafka-consumer-group-manual-ack-error-2
+```
+## Delete topics
+```shell
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic simple.test.topic.error
+kafka-topics.sh --zookeeper localhost:2181 --list | xargs kafka-topics.sh --zookeeper localhost:2181 --delete --topic
 ```
